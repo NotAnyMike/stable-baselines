@@ -2,7 +2,7 @@
 
 Things that I have added so far:
 
-- Nothing
+- Added a render parameter in ppo2
 
 # ORIGINAL README
 <img src="docs/\_static/img/logo.png" align="right" width="40%"/>
