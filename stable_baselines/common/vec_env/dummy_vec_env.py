@@ -12,8 +12,8 @@ class DummyVecEnv(VecEnv):
     :param env_fns: ([Gym Environment]) the list of environments to vectorize
     """
 
-    def __init__(self, env_fns):
-        self.envs = [fn() for fn in env_fns]
+    def __init__(self, env_fns, **env_args):
+        self.envs = [fn(**env_args) for fn in env_fns]
         env = self.envs[0]
         VecEnv.__init__(self, len(env_fns), env.observation_space, env.action_space)
         obs_space = env.observation_space
@@ -57,7 +57,10 @@ class DummyVecEnv(VecEnv):
         if self.num_envs == 1:
             return self.envs[0].render(*args, **kwargs)
         else:
-            return super().render(*args, **kwargs)
+            return self.envs[0].render(*args, **kwargs)
+        # Old code
+        #else:
+        #    return super().render(*args, **kwargs)
 
     def _save_obs(self, env_idx, obs):
         for key in self.keys:
