@@ -38,7 +38,10 @@ def _worker(remote, parent_remote, env_fn_wrapper):
                 remote.send(setattr(env, data[0], data[1]))
             else:
                 raise NotImplementedError
-        except EOFError:
+        except EOFError as e:
+            print("ERROR WITH ONE PARALLEL ENV:")
+            print(e)
+            print("Closing the env")
             break
 
 
