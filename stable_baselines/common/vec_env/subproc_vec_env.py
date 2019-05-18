@@ -39,11 +39,15 @@ def _worker(remote, parent_remote, env_fn_wrapper):
             else:
                 raise NotImplementedError
         except EOFError as e:
-            print("ERROR WITH ONE PARALLEL ENV:")
+            print("ERROR WITH ONE PARALLEL ENV: EOFError")
             print(e)
             print("Closing the env")
             break
-
+        except Exception as e:
+            print("ERROR WITH ONE PARALLEL ENV: UNKOWN")
+            print(e)
+            print("Closing the env")
+            break
 
 class SubprocVecEnv(VecEnv):
     """
